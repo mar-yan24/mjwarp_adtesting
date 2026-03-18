@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "mjwarp-adtest"
+version = "0.1.0"
+description = "Autodifferentiation testing suite for mujoco_warp"
+requires-python = ">=3.10"
+dependencies = [
+  "mujoco>=3.6.0",
+  "warp-lang>=1.12",
+  "numpy",
+  "pytest>=7.0",
+  "pytest-xdist",
+  "pyyaml",
+  "absl-py",
+]
+
+[project.optional-dependencies]
+visual = [
+  "matplotlib",
+  "Pillow",
+  "imageio[ffmpeg]",
+]
+analysis = [
+  "pandas",
+  "tabulate",
+  "jinja2",
+]
+
+[tool.setuptools.packages.find]
+include = ["mjwarp_adtest*"]
+
+[tool.pytest.ini_options]
+testpaths = ["mjwarp_adtest"]
+markers = [
+  "math: mathematical correctness tests",
+  "perf: performance benchmarking tests",
+  "visual: visual verification tests",
+  "slow: slow-running tests (humanoid, scaling)",
+  "gpu_sm70: requires CUDA SM 70+ (tile kernels)",
+]
+
+[[tool.setuptools.package-data]]
+mjwarp_adtest = ["**/*.xml"]
+
+[tool.uv]
+index = [
+  { name = "nvidia", url = "https://pypi.nvidia.com" },
+  { name = "mujoco", url = "https://py.mujoco.org" },
+]

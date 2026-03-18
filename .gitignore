@@ -1,0 +1,35 @@
+# Results output
+results/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Warp
+*.warp_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Ruff
+.ruff_cache/
+
+# Generated visual outputs (in results only)
+results/**/*.png
+results/**/*.mp4
