@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=68.0"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "mjwarp-adtest"
@@ -42,7 +42,7 @@ markers = [
   "gpu_sm70: requires CUDA SM 70+ (tile kernels)",
 ]
 
-[[tool.setuptools.package-data]]
+[tool.setuptools.package-data]
 mjwarp_adtest = ["**/*.xml"]
 
 [tool.uv]
