@@ -280,6 +280,195 @@ NO_CONTACT_HIGH_XML = """
 """
 
 # ---------------------------------------------------------------------------
+# Determinism models
+# ---------------------------------------------------------------------------
+
+MANY_SPHERES_XML = """
+<mujoco>
+  <option gravity="0 0 -9.81" jacobian="sparse" solver="Newton" iterations="30"/>
+  <worldbody>
+    <geom type="plane" size="5 5 0.01"/>
+    <body name="s1" pos="-0.15 -0.15 0.1">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="s2" pos="0.15 -0.15 0.1">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="s3" pos="-0.15 0.15 0.1">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="s4" pos="0.15 0.15 0.1">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="s5" pos="0 0 0.3">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="s6" pos="-0.15 0 0.3">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="s7" pos="0.15 0 0.3">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="s8" pos="0 0 0.5">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+  </worldbody>
+</mujoco>
+"""
+
+MIXED_GEOM_TYPES_XML = """
+<mujoco>
+  <option gravity="0 0 -9.81" jacobian="sparse" solver="Newton" iterations="30"/>
+  <worldbody>
+    <geom type="plane" size="5 5 0.01"/>
+    <body name="sphere" pos="-0.6 0 0.15">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="capsule" pos="-0.3 0 0.15">
+      <joint type="free"/>
+      <geom type="capsule" size="0.05 0.1" mass="1"/>
+    </body>
+    <body name="box" pos="0 0 0.15">
+      <joint type="free"/>
+      <geom type="box" size="0.08 0.08 0.08" mass="1"/>
+    </body>
+    <body name="ellipsoid" pos="0.3 0 0.15">
+      <joint type="free"/>
+      <geom type="ellipsoid" size="0.1 0.07 0.05" mass="1"/>
+    </body>
+    <body name="cylinder" pos="0.6 0 0.15">
+      <joint type="free"/>
+      <geom type="cylinder" size="0.07 0.1" mass="1"/>
+    </body>
+  </worldbody>
+</mujoco>
+"""
+
+SINGLE_CONTACT_XML = """
+<mujoco>
+  <option gravity="0 0 -9.81" jacobian="sparse" solver="Newton" iterations="30"/>
+  <worldbody>
+    <geom type="plane" size="5 5 0.01"/>
+    <body pos="0 0 0.05">
+      <joint name="slide" type="slide" axis="0 0 1"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor joint="slide" gear="1"/>
+  </actuator>
+</mujoco>
+"""
+
+STACKED_BOXES_XML = """
+<mujoco>
+  <option gravity="0 0 -9.81" jacobian="sparse" solver="Newton" iterations="50"/>
+  <worldbody>
+    <geom type="plane" size="5 5 0.01"/>
+    <body name="box1" pos="0 0 0.1">
+      <joint type="free"/>
+      <geom type="box" size="0.1 0.1 0.1" mass="1"/>
+    </body>
+    <body name="box2" pos="0 0 0.3">
+      <joint type="free"/>
+      <geom type="box" size="0.1 0.1 0.1" mass="1"/>
+    </body>
+    <body name="box3" pos="0 0 0.5">
+      <joint type="free"/>
+      <geom type="box" size="0.1 0.1 0.1" mass="1"/>
+    </body>
+    <body name="box4" pos="0 0 0.7">
+      <joint type="free"/>
+      <geom type="box" size="0.1 0.1 0.1" mass="1"/>
+    </body>
+  </worldbody>
+</mujoco>
+"""
+
+HIGH_NGEOM_XML = """
+<mujoco>
+  <option gravity="0 0 -9.81" jacobian="sparse" solver="Newton" iterations="30"/>
+  <worldbody>
+    <geom type="plane" size="20 20 0.01"/>
+    <body name="row0" pos="0 0 0.15">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+      <replicate count="50" offset="0.25 0 0"/>
+    </body>
+    <body name="row1" pos="0 0.25 0.15">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+      <replicate count="50" offset="0.25 0 0"/>
+    </body>
+    <body name="row2" pos="0 0.5 0.15">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+      <replicate count="50" offset="0.25 0 0"/>
+    </body>
+    <body name="row3" pos="0 0.75 0.15">
+      <joint type="free"/>
+      <geom type="sphere" size="0.1" mass="1"/>
+      <replicate count="50" offset="0.25 0 0"/>
+    </body>
+  </worldbody>
+</mujoco>
+"""
+
+SENSOR_CONTACT_XML = """
+<mujoco>
+  <option gravity="0 0 -9.81" jacobian="sparse" solver="Newton" iterations="30"/>
+  <worldbody>
+    <geom name="floor" type="plane" size="5 5 0.01"/>
+    <body name="ball" pos="0 0 0.15">
+      <joint name="slide" type="slide" axis="0 0 1"/>
+      <geom name="ball_geom" type="sphere" size="0.1" mass="1"/>
+      <site name="touch_site" pos="0 0 -0.1"/>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor joint="slide" gear="1"/>
+  </actuator>
+  <sensor>
+    <touch site="touch_site"/>
+    <framepos objtype="body" objname="ball"/>
+  </sensor>
+</mujoco>
+"""
+
+EQUALITY_CONSTRAINT_XML = """
+<mujoco>
+  <option gravity="0 0 -9.81" jacobian="sparse" solver="Newton" iterations="30"/>
+  <worldbody>
+    <geom type="plane" size="5 5 0.01"/>
+    <body name="b1" pos="-0.2 0 0.05">
+      <joint name="s1" type="slide" axis="0 0 1"/>
+      <geom name="g1" type="sphere" size="0.1" mass="1"/>
+    </body>
+    <body name="b2" pos="0.2 0 0.05">
+      <joint name="s2" type="slide" axis="0 0 1"/>
+      <geom name="g2" type="sphere" size="0.1" mass="1"/>
+    </body>
+  </worldbody>
+  <equality>
+    <connect body1="b1" body2="b2" anchor="0 0 0.05"/>
+  </equality>
+  <actuator>
+    <motor joint="s1" gear="1"/>
+    <motor joint="s2" gear="1"/>
+  </actuator>
+</mujoco>
+"""
+
+# ---------------------------------------------------------------------------
 # Model sets for parametrization
 # ---------------------------------------------------------------------------
 
@@ -300,4 +489,14 @@ CONTACT_MODELS = {
   "no_contact_high": NO_CONTACT_HIGH_XML,
 }
 
-ALL_MODELS = {**SMOOTH_MODELS, **CONTACT_MODELS}
+DETERMINISM_MODELS = {
+  "many_spheres": MANY_SPHERES_XML,
+  "mixed_geom_types": MIXED_GEOM_TYPES_XML,
+  "single_contact": SINGLE_CONTACT_XML,
+  "stacked_boxes": STACKED_BOXES_XML,
+  "high_ngeom": HIGH_NGEOM_XML,
+  "sensor_contact": SENSOR_CONTACT_XML,
+  "equality_constraint": EQUALITY_CONSTRAINT_XML,
+}
+
+ALL_MODELS = {**SMOOTH_MODELS, **CONTACT_MODELS, **DETERMINISM_MODELS}

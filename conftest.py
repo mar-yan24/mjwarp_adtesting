@@ -8,7 +8,7 @@ import os
 import pytest
 import warp as wp
 
-from mjwarp_adtest.config import ADTestConfig
+from mjwarp_adtest.config import ADTestConfig, DeterminismTestConfig
 
 
 def pytest_addoption(parser):
@@ -89,6 +89,22 @@ def pytest_addoption(parser):
     help="path to mujoco_warp source root",
   )
 
+  # --- Determinism test-specific options ---
+  parser.addoption(
+    "--det-nruns",
+    action="store",
+    default=3,
+    type=int,
+    help="number of repeated runs for determinism checks",
+  )
+  parser.addoption(
+    "--det-nsteps",
+    action="store",
+    default=10,
+    type=int,
+    help="default step count for determinism tests",
+  )
+
 
 def pytest_configure(config):
   kernel_cache_dir = config.getoption("--kernel_cache_dir")
@@ -114,6 +130,17 @@ def ad_config(request):
     fd_eps=request.config.getoption("--fd-eps"),
     fd_tol=request.config.getoption("--fd-tol"),
     contact_fd_tol=request.config.getoption("--contact-fd-tol"),
+    mujoco_warp_root=request.config.getoption("--mujoco-warp-root"),
+    results_dir=request.config.getoption("--results-dir"),
+  )
+
+
+@pytest.fixture(scope="session")
+def det_config(request):
+  """Session-scoped DeterminismTestConfig built from command-line options."""
+  return DeterminismTestConfig(
+    nruns=request.config.getoption("--det-nruns"),
+    short_horizon=request.config.getoption("--det-nsteps"),
     mujoco_warp_root=request.config.getoption("--mujoco-warp-root"),
     results_dir=request.config.getoption("--results-dir"),
   )

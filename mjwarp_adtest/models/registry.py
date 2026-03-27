@@ -8,6 +8,12 @@ from mjwarp_adtest.models.xml_defs import ALL_MODELS
 # Benchmark models that live as files in the mujoco_warp repo
 _BENCHMARK_PATHS = {
   "humanoid": "mujoco_warp/test_data/humanoid/humanoid.xml",
+  "collision": "mujoco_warp/test_data/collision.xml",
+  "primitives": "mujoco_warp/test_data/primitives.xml",
+  "constraints": "mujoco_warp/test_data/constraints.xml",
+  "convex_collision": "mujoco_warp/test_data/convex_collision/box100.xml",
+  "hfield": "mujoco_warp/test_data/hfield/hfield.xml",
+  "flex_rope": "mujoco_warp/test_data/flex/rope.xml",
 }
 
 

@@ -38,6 +38,7 @@ markers = [
   "math: mathematical correctness tests",
   "perf: performance benchmarking tests",
   "visual: visual verification tests",
+  "determinism: determinism/reproducibility tests",
   "slow: slow-running tests (humanoid, scaling)",
   "gpu_sm70: requires CUDA SM 70+ (tile kernels)",
 ]
